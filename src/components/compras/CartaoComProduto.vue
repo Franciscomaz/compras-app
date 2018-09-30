@@ -1,12 +1,10 @@
 <template>
-  <div>
-    Carrinho de compras
-  </div>
+
 </template>
 
 <script>
 export default {
-  descricao: 'CarrinhoDeCompras'
+  name: 'CartaoComProduto'
 }
 </script>
 
