@@ -1,7 +1,9 @@
 <template>
   <v-container>
     <v-layout>
-      <v-flex xs12 sm12>
+      <v-flex xs2 sm2>
+      </v-flex>
+      <v-flex xs10 sm10>
           <v-container fluid>
             <v-layout row wrap>
               <v-flex
@@ -11,7 +13,7 @@
                   sm6
                   md4
                   lg4
-                  pa-3
+                  pa-4
               >
                 <v-card color="white" class="indigo--text">
                   <v-layout row>
