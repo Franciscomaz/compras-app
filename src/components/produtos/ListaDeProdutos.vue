@@ -21,13 +21,13 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.id" label="Id"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.descricao" label="Descrição"></v-text-field>
+                  <v-text-field v-model="editedItem.nome" label="Nome"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
                   <v-text-field v-model="editedItem.valor" label="Valor"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm12 md12>
+                  <v-textarea v-model="editedItem.descricao" label="Descrição"></v-textarea>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -35,8 +35,8 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click.native="close">Cancelar</v-btn>
-            <v-btn color="blue darken-1" flat @click.native="save">Salvar</v-btn>
+            <v-btn color="red" flat @click.native="close">Cancelar</v-btn>
+            <v-btn color="primary" flat @click.native="save">Salvar</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -49,6 +49,7 @@
     >
       <template slot="items" slot-scope="props">
         <td>{{ props.item.id }}</td>
+        <td class="text-xs-right">{{ props.item.nome }}</td>
         <td class="text-xs-right">{{ props.item.descricao }}</td>
         <td class="text-xs-right">{{ props.item.valor }}</td>
         <td class="justify-center layout px-0">
@@ -85,27 +86,24 @@ export default {
       {
         text: 'Id',
         align: 'left',
-        sortable: false,
-        value: 'name'
+        value: 'id'
       },
+      { text: 'Nome', value: 'nome' },
       { text: 'Descrição', value: 'descricao' },
       { text: 'Valor', value: 'valor' },
       { text: 'Ações', value: 'name', sortable: false }
     ],
     editedIndex: -1,
     editedItem: {
-      descricao: '',
-      valor: 0,
       id: 0,
-      carbs: 0,
-      protein: 0
+      nome: 0,
+      descricao: '',
+      valor: 0
     },
     defaultItem: {
+      nome: 0,
       descricao: '',
-      valor: 0,
-      id: 0,
-      carbs: 0,
-      protein: 0
+      valor: 0
     }
   }),
   mounted () {
@@ -124,35 +122,13 @@ export default {
     }
   },
   methods: {
-
-    ...mapActions('Produtos', ['listarProdutos']),
-
-    editItem (item) {
-      this.editedIndex = this.desserts.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
-    },
-
-    deleteItem (item) {
-      const index = this.desserts.indexOf(item)
-      confirm('Tem certeza que deseja excluir esse item?') && this.desserts.splice(index, 1)
-    },
-
+    ...mapActions('Produtos', ['listarProdutos', 'adicionarProduto', 'removerProduto', 'atualizarProduto']),
     close () {
       this.dialog = false
       setTimeout(() => {
         this.editedItem = Object.assign({}, this.defaultItem)
         this.editedIndex = -1
       }, 300)
-    },
-
-    save () {
-      if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem)
-      } else {
-        this.desserts.push(this.editedItem)
-      }
-      this.close()
     }
   }
 }
