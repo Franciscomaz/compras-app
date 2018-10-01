@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Dashboard from './components/navegacao/Dashboard'
-import ListaDeProdutos from './components/compras/ListaDeProdutos'
-import CarrinhoDeCompras from './components/compras/CarrinhoDeCompras'
-import MostruarioDeProdutos from './components/compras/MostruarioDeProdutos'
+import ListaDeProdutos from './components/produtos/ListaDeProdutos'
+import CarrinhoDeCompras from './components/carrinho-de-compras/CarrinhoDeCompras'
+import MostruarioDeProdutos from './components/produtos/MostruarioDeProdutos'
 
 Vue.use(Router)
 

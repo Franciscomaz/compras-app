@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Navegacao from './components/navegacao/store'
-import Compras from './components/compras/store'
+import Produtos from './components/produtos/store'
+import CarrinhoDeCompras from './components/carrinho-de-compras/store'
 
 Vue.use(Vuex)
 
 const modules = {
   Navegacao,
-  Compras
+  Produtos,
+  CarrinhoDeCompras
 }
 
 export default new Vuex.Store({

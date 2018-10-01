@@ -112,7 +112,7 @@ export default {
     this.listarProdutos()
   },
   computed: {
-    ...mapState('Compras', ['listaDeProdutos']),
+    ...mapState('Produtos', ['listaDeProdutos']),
 
     formTitle () {
       return this.editedIndex === -1 ? 'Novo Produto' : 'Editar Produto'
@@ -125,7 +125,7 @@ export default {
   },
   methods: {
 
-    ...mapActions('Compras', ['listarProdutos']),
+    ...mapActions('Produtos', ['listarProdutos']),
 
     editItem (item) {
       this.editedIndex = this.desserts.indexOf(item)
