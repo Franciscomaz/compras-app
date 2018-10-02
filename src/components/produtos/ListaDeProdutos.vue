@@ -29,19 +29,19 @@
                   <v-text-field v-model="editedItem.valor" label="Valor"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
-                  <v-select 
-                  :items="categorias" 
-                  item-text="nome" 
-                  v-model="editedItem.categoria" 
+                  <v-select
+                  :items="categorias"
+                  item-text="nome"
+                  v-model="editedItem.categoria"
                   label="Categoria"
                   return-object
                   ></v-select>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
                   <v-select
-                  :items="marcas" 
-                  item-text="nome" 
-                  v-model="editedItem.marca" 
+                  :items="marcas"
+                  item-text="nome"
+                  v-model="editedItem.marca"
                   label="Marca"
                   return-object></v-select>
                 </v-flex>
@@ -119,11 +119,11 @@ export default {
       nome: '',
       marca: {
         id: 1,
-        nome: "Teste"
+        nome: 'Teste'
       },
       categoria: {
         id: 2,
-        nome: "Teste"
+        nome: 'Teste'
       },
       valor: 0
     },
@@ -133,11 +133,11 @@ export default {
       nome: '',
       marca: {
         id: 1,
-        nome: "Teste"
+        nome: 'Teste'
       },
       categoria: {
         id: 2,
-        nome: "Teste"
+        nome: 'Teste'
       },
       valor: 0
     }
@@ -161,11 +161,11 @@ export default {
   },
   methods: {
     ...mapActions('Produtos', [
-      'listarProdutos', 
+      'listarProdutos',
       'listarCategorias',
-      'listarMarcas', 
-      'adicionarProduto', 
-      'removerProduto', 
+      'listarMarcas',
+      'adicionarProduto',
+      'removerProduto',
       'atualizarProduto'
     ]),
     close () {
@@ -175,34 +175,34 @@ export default {
         this.editedIndex = -1
       }, 300)
     },
-    
-      editItem (item) {
-        this.editedIndex = this.listaDeProdutos.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-      },
 
-      deleteItem (item) {
-        const index = this.listaDeProdutos.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.listaDeProdutos.splice(index, 1)
-      },
+    editItem (item) {
+      this.editedIndex = this.listaDeProdutos.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.dialog = true
+    },
 
-      close () {
-        this.dialog = false
-        setTimeout(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        }, 300)
-      },
+    deleteItem (item) {
+      const index = this.listaDeProdutos.indexOf(item)
+      confirm('Are you sure you want to delete this item?') && this.listaDeProdutos.splice(index, 1)
+    },
 
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.listaDeProdutos[this.editedIndex], this.editedItem)
-        } else {
-          this.listaDeProdutos.push(this.editedItem)
-        }
-        this.close()
+    close () {
+      this.dialog = false
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      }, 300)
+    },
+
+    save () {
+      if (this.editedIndex > -1) {
+        Object.assign(this.listaDeProdutos[this.editedIndex], this.editedItem)
+      } else {
+        this.listaDeProdutos.push(this.editedItem)
       }
+      this.close()
+    }
   }
 }
 </script>

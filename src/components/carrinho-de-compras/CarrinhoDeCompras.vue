@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="mostrarCarrinhoDeCompras" max-width="500px">
+  <v-dialog v-model="mostrarCarrinhoDeCompras" max-width="800px">
     <v-card>
       <v-card-text>
         <v-icon color="indigo">shopping_cart</v-icon>
@@ -19,7 +19,9 @@
             <v-list-tile-title class="text--secondary" v-text="produto.descricao"></v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-content>
+            <v-btn @click="produto.decrementarQuantidade()" flat color="red">-</v-btn>
             <v-text-field v-text="produto.quantidade"></v-text-field>
+            <v-btn @click="produto.incrementarQuantidade()" flat color="success">+</v-btn>
           </v-list-tile-content>
           <v-list-tile-content>
             <v-list-tile-title v-text="produto.valor"></v-list-tile-title>

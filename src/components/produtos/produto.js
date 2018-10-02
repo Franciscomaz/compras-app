@@ -16,6 +16,13 @@ export default class Produto {
     this.quantidade++
   }
 
+  decrementarQuantidade () {
+    if (this.quantidade === 0) {
+      return 0
+    }
+    this.quantidade--
+  }
+
   valorTotal () {
     return this.valor * this.quantidade
   }
