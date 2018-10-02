@@ -26,14 +26,6 @@ export default ({
       const produtos = (await axios.get('http://localhost:3000/produtos')).data.map(produto => new Produto(produto))
       commit('LISTAR_PRODUTOS', produtos)
     },
-    listarMarcas: async ({ commit }) => {
-      const marcas = (await axios.get('http://localhost:3000/marcas')).data
-      commit('LISTAR_MARCAS', marcas)
-    },
-    listarCategorias: async ({ commit }) => {
-      const categorias = (await axios.get('http://localhost:3000/categorias')).data
-      commit('LISTAR_CATEGORIAS', categorias)
-    },
     atualizarProduto: async ({ commit }, produto) => {
       await axios.put('http://localhost:3000/produtos', produto)
       this.listarProdutos()

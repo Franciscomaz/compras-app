@@ -17,8 +17,8 @@ export default class Produto {
   }
 
   decrementarQuantidade () {
-    if (this.quantidade === 0) {
-      return 0
+    if (this.quantidade <= 1) {
+      return
     }
     this.quantidade--
   }

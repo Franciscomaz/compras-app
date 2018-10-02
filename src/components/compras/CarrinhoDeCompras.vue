@@ -3,7 +3,7 @@
     <v-card>
       <v-card-text>
         <v-icon color="indigo">shopping_cart</v-icon>
-        <span class="ml-1">{{quantidade()}}</span>
+        <span class="ml-1">{{quantidade()}} </span>
         <span v-if="quantidade() === 1">item</span>
         <span v-else> itens</span>
         <span> em seu carrinho</span>
@@ -12,19 +12,16 @@
       <v-list v-for="produto in carrinhoDeCompras" :key="produto.id">
         <v-list-tile>
           <v-list-tile-content>
-            <v-list-tile-title v-text="produto.nome"></v-list-tile-title>
+            <v-list-tile-title class="text--black" v-text="produto.nome"></v-list-tile-title>
           </v-list-tile-content>
-          <v-list-tile-content>
-            <v-icon
-                small
-                class="mr-2"
-                @click="deleteItem(props.item)"
-            >
-              delete
-            </v-icon>
-            <v-btn @click="produto.decrementarQuantidade()" flat color="red">-</v-btn>
-            <v-text-field v-text="produto.quantidade"></v-text-field>
-            <v-btn @click="produto.incrementarQuantidade()" flat color="success">+</v-btn>
+          <v-list-tile-content class="align-buttons">
+            <v-btn @click="produto.decrementarQuantidade()" flat color="red">
+              <v-icon>remove</v-icon>
+            </v-btn>
+            <v-text-field v-text="produto.quantidade" class="justify-center"></v-text-field>
+            <v-btn @click="produto.incrementarQuantidade()" flat color="success">
+              <v-icon>add</v-icon>
+            </v-btn>
           </v-list-tile-content>
           <v-list-tile-content>
             <v-list-tile-title v-text="'R$ ' + produto.valor"></v-list-tile-title>
@@ -83,5 +80,9 @@ export default {
 </script>
 
 <style scoped>
-
+    .align-buttons{
+      display: flex;
+      flex-direction: row;
+      align-items: initial;
+    }
 </style>
