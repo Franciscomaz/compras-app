@@ -27,10 +27,10 @@
             <v-btn @click="produto.incrementarQuantidade()" flat color="success">+</v-btn>
           </v-list-tile-content>
           <v-list-tile-content>
-            <v-list-tile-title v-text="produto.valor"></v-list-tile-title>
+            <v-list-tile-title v-text="'R$ ' + produto.valor"></v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-content>
-            <v-list-tile-title v-text="produto.valorTotal()"></v-list-tile-title>
+            <v-list-tile-title v-text="'R$ ' + produto.valorTotal()"></v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-action>
             <v-btn @click="removerDoCarrinho(produto)" flat color="red" v-text="'X'"></v-btn>
@@ -38,16 +38,10 @@
         </v-list-tile>
         <v-divider></v-divider>
       </v-list>
-      <v-card-text color="red">Teste</v-card-text>
+      <v-card-text v-show="!possuiProduto()" class="text-md-center" color="red">Nenhum produto adicionado no carrinho
+      </v-card-text>
       <v-card-actions>
-        <v-layout>
-          <v-flex>
-            <v-btn flat color="indigo">Checkout</v-btn>
-          </v-flex>
-          <v-flex xs5>
-            <v-card-text class="right"><b>Total: </b> {{valorTotal()}}</v-card-text>
-          </v-flex>
-        </v-layout>
+        <v-btn :disabled="!possuiProduto()" flat color="indigo">Checkout</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -55,6 +49,7 @@
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'CarrinhoDeCompras',
   data: () => ({

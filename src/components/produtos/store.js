@@ -7,7 +7,7 @@ export default ({
     listaDeProdutos: [],
     marcas: [],
     categorias: [],
-    mostrarModal: false
+    mostrarModalDeEdicao: false
   },
   mutations: {
     LISTAR_PRODUTOS: (state, obj) => {
