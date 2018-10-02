@@ -25,7 +25,7 @@ export default ({
       commit('TOGGLE', payload)
     },
     adicionarNoCarrinho: ({ commit, getters }, produto) => {
-      if (getters.possuiProduto(produto)) {
+      if (getters.contemProduto(produto)) {
         commit('INCREMENTAR_QUANTIDADE', produto)
       } else {
         commit('ADICIONAR', produto)
@@ -37,7 +37,7 @@ export default ({
     }
   },
   getters: {
-    possuiProduto: state => obj => {
+    contemProduto: state => obj => {
       return state.carrinhoDeCompras.find(produto => produto.id === obj.id) !== undefined
     },
     valorTotal: state => {
@@ -45,6 +45,9 @@ export default ({
     },
     quantidade: state => {
       return state.carrinhoDeCompras.reduce((previous, obj) => (previous + obj.quantidade), 0)
+    },
+    possuiProduto: state => {
+      return state.carrinhoDeCompras.length > 0
     }
   }
 })

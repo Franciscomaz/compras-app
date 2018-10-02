@@ -34,12 +34,12 @@ export default ({
       const categorias = (await axios.get('http://localhost:3000/categorias')).data
       commit('LISTAR_CATEGORIAS', categorias)
     },
-    atualizarProduto: async ({ commit }) => {
-      await axios.put('http://localhost:3000/produtos')
+    atualizarProduto: async ({ commit }, produto) => {
+      await axios.put('http://localhost:3000/produtos', produto)
       this.listarProdutos()
     },
-    adicionarProduto: async ({ commit }) => {
-      await axios.post('http://localhost:3000/produtos')
+    adicionarProduto: async ({ commit }, produto) => {
+      await axios.post('http://localhost:3000/produtos', produto)
       this.listarProdutos()
     },
     removerProduto: async ({ commit }) => {

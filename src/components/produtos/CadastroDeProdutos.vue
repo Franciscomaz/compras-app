@@ -14,12 +14,6 @@
                 <v-flex xs12 sm6 md4>
                   <v-text-field v-model="produto.valor" label="Valor"></v-text-field>
                 </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-select v-model="produto.categoria.id" label="Categoria"></v-select>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-select v-model="produto.marca.id" label="Marca"></v-select>
-                </v-flex>
                 <v-flex xs12 sm12 md12>
                   <v-textarea v-model="produto.descricao" label="Descrição"></v-textarea>
                 </v-flex>
@@ -37,7 +31,7 @@
 </template>
 
 <script>
-import {mapActions} from "vuex"
+import { mapActions } from 'vuex'
 
 export default {
   name: 'CadastroDeProdutos',
@@ -45,7 +39,7 @@ export default {
     produto: Object
   },
   methods: {
-    ...mapActions('Produtos', ['listarProdutos', 'adicionarProduto', 'removerProduto', 'atualizarProduto']),
+    ...mapActions('Produtos', ['listarProdutos', 'adicionarProduto', 'removerProduto', 'atualizarProduto'])
   }
 }
 </script>

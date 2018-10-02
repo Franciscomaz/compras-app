@@ -38,7 +38,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Menu from './Menu'
-import CarrinhoDeCompras from '../carrinho-de-compras/CarrinhoDeCompras'
+import CarrinhoDeCompras from '../compras/CarrinhoDeCompras'
 
 export default {
   components: { CarrinhoDeCompras, Menu },

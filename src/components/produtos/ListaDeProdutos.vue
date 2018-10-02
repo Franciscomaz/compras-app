@@ -28,23 +28,6 @@
                 <v-flex xs12 sm6 md4>
                   <v-text-field v-model="editedItem.valor" label="Valor"></v-text-field>
                 </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-select
-                  :items="categorias"
-                  item-text="nome"
-                  v-model="editedItem.categoria"
-                  label="Categoria"
-                  return-object
-                  ></v-select>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-select
-                  :items="marcas"
-                  item-text="nome"
-                  v-model="editedItem.marca"
-                  label="Marca"
-                  return-object></v-select>
-                </v-flex>
                 <v-flex xs12 sm12 md12>
                   <v-textarea v-model="editedItem.descricao" label="Descrição"></v-textarea>
                 </v-flex>
@@ -81,9 +64,16 @@
           </v-icon>
           <v-icon
               small
+              class="mr-2"
               @click="deleteItem(props.item)"
           >
             delete
+          </v-icon>
+          <v-icon
+              small
+              @click="adicionarNoCarrinho(props.item)"
+          >
+            shopping_cart
           </v-icon>
         </td>
       </template>
@@ -113,39 +103,19 @@ export default {
       { text: 'Ações', value: 'name', sortable: false }
     ],
     editedIndex: -1,
-    editedItem: {
-      nome: '',
-      descricao: '',
-      nome: '',
-      marca: {
-        id: 1,
-        nome: 'Teste'
-      },
-      categoria: {
-        id: 2,
-        nome: 'Teste'
-      },
-      valor: 0
-    },
     defaultItem: {
       nome: '',
       descricao: '',
+      valor: 0
+    },
+    editedItem: {
       nome: '',
-      marca: {
-        id: 1,
-        nome: 'Teste'
-      },
-      categoria: {
-        id: 2,
-        nome: 'Teste'
-      },
+      descricao: '',
       valor: 0
     }
   }),
   mounted () {
     this.listarProdutos()
-    this.listarMarcas()
-    this.listarCategorias()
   },
   computed: {
     ...mapState('Produtos', ['listaDeProdutos', 'categorias', 'marcas']),
@@ -168,6 +138,7 @@ export default {
       'removerProduto',
       'atualizarProduto'
     ]),
+    ...mapActions('CarrinhoDeCompras', ['adicionarNoCarrinho']),
     close () {
       this.dialog = false
       setTimeout(() => {
@@ -187,18 +158,12 @@ export default {
       confirm('Are you sure you want to delete this item?') && this.listaDeProdutos.splice(index, 1)
     },
 
-    close () {
-      this.dialog = false
-      setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      }, 300)
-    },
-
     save () {
       if (this.editedIndex > -1) {
+        this.atualizarProduto(this.editedItem)
         Object.assign(this.listaDeProdutos[this.editedIndex], this.editedItem)
       } else {
+        this.adicionarProduto(this.editedItem)
         this.listaDeProdutos.push(this.editedItem)
       }
       this.close()

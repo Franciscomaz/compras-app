@@ -3,7 +3,7 @@
     <v-card>
       <v-card-text>
         <v-icon color="indigo">shopping_cart</v-icon>
-        <span>{{quantidade()}}</span>
+        <span class="ml-1">{{quantidade()}}</span>
         <span v-if="quantidade() === 1">item</span>
         <span v-else> itens</span>
         <span> em seu carrinho</span>
@@ -11,14 +11,17 @@
       <v-divider></v-divider>
       <v-list v-for="produto in carrinhoDeCompras" :key="produto.id">
         <v-list-tile>
-          <v-list-tile-avatar >
-            <img :src="produto.imagem">
-          </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title v-text="produto.nome"></v-list-tile-title>
-            <v-list-tile-title class="text--secondary" v-text="produto.descricao"></v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-content>
+            <v-icon
+                small
+                class="mr-2"
+                @click="deleteItem(props.item)"
+            >
+              delete
+            </v-icon>
             <v-btn @click="produto.decrementarQuantidade()" flat color="red">-</v-btn>
             <v-text-field v-text="produto.quantidade"></v-text-field>
             <v-btn @click="produto.incrementarQuantidade()" flat color="success">+</v-btn>
@@ -35,6 +38,7 @@
         </v-list-tile>
         <v-divider></v-divider>
       </v-list>
+      <v-card-text color="red">Teste</v-card-text>
       <v-card-actions>
         <v-layout>
           <v-flex>
@@ -78,7 +82,7 @@ export default {
   },
   methods: {
     ...mapActions('CarrinhoDeCompras', ['removerDoCarrinho']),
-    ...mapGetters('CarrinhoDeCompras', ['valorTotal', 'quantidade'])
+    ...mapGetters('CarrinhoDeCompras', ['valorTotal', 'quantidade', 'possuiProduto'])
   }
 }
 </script>

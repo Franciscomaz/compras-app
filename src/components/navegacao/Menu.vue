@@ -31,9 +31,7 @@ export default {
   data: () => ({
     descricao: 'Menu',
     items: [
-      { title: 'Home', icon: 'dashboard', path: '/home' },
-      { title: 'Cadastro de Produtos', icon: 'view_list', path: 'produtos' },
-      { title: 'Sair', icon: 'exit_to_app', path: 'login' }
+      { title: 'Produtos', icon: 'view_list', path: '/produtos' }
     ]
   }),
   methods: {
