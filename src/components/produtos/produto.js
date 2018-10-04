@@ -8,7 +8,7 @@ export default class Produto {
     this.quantidade = 1
   }
 
-  resetar () {
+  limpar () {
     this.quantidade = 0
   }
 

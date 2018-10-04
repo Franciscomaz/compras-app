@@ -32,7 +32,7 @@ export default ({
       }
     },
     removerDoCarrinho: ({ commit }, produto) => {
-      produto.resetar()
+      produto.limpar()
       commit('REMOVER', produto)
     }
   },
