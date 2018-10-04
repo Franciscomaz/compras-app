@@ -1,18 +1,17 @@
 <template>
   <div>
+    <cadastro-de-produto></cadastro-de-produto>
     <v-toolbar color="white">
-      <v-toolbar-title class="text--secondary">Produtos</v-toolbar-title>
+      <v-layout>
+        <v-toolbar-title class="text--secondary">
+          Produtos
+        </v-toolbar-title>
+      </v-layout>
       <v-toolbar-title>
-      <v-btn @click="dialog = true" slot="activator" small fab dark color="indigo">
-        <v-icon dark>add</v-icon>
-      </v-btn>
+        <v-btn @click="toggle(true)" slot="activator" small fab dark color="indigo">
+          <v-icon dark>add</v-icon>
+        </v-btn>
       </v-toolbar-title>
-      <v-divider
-          class="mx-2"
-          inset
-          vertical
-      ></v-divider>
-      <v-spacer></v-spacer>
     </v-toolbar>
     <v-data-table
         :headers="headers"
@@ -29,7 +28,7 @@
           <v-icon
               small
               class="mr-2"
-              @click="editItem(props.item)"
+              @click="editarProduto(props.item)"
           >
             edit
           </v-icon>
@@ -48,17 +47,19 @@
           </v-icon>
         </td>
       </template>
-      <template slot="no-data">
-        <v-btn color="primary" @click="listarProdutos">Reset</v-btn>
-      </template>
+      <v-layout slot="no-data" class="d-flex">
+        <div class="text-md-center red--text">Nenhum produto encontrado.</div>
+      </v-layout>
     </v-data-table>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import CadastroDeProduto from './CadastroDeProduto'
 
 export default {
+  components: { CadastroDeProduto },
   data: () => ({
     descricao: 'ListaDeProdutos',
     dialog: false,
@@ -73,27 +74,13 @@ export default {
       { text: 'Valor', value: 'valor' },
       { text: 'Ações', value: 'name', sortable: false }
     ],
-    editedIndex: -1,
-    defaultItem: {
-      nome: '',
-      descricao: '',
-      valor: 0
-    },
-    editedItem: {
-      nome: '',
-      descricao: '',
-      valor: 0
-    }
+    editedIndex: -1
   }),
   mounted () {
     this.listarProdutos()
   },
   computed: {
-    ...mapState('Produtos', ['listaDeProdutos', 'categorias', 'marcas']),
-
-    formTitle () {
-      return this.editedIndex === -1 ? 'Novo Produto' : 'Editar Produto'
-    }
+    ...mapState('Produtos', ['listaDeProdutos', 'categorias', 'marcas'])
   },
   watch: {
     dialog (val) {
@@ -103,41 +90,19 @@ export default {
   methods: {
     ...mapActions('Produtos', [
       'listarProdutos',
-      'listarCategorias',
-      'listarMarcas',
-      'adicionarProduto',
-      'removerProduto',
-      'atualizarProduto'
+      'assign',
+      'toggle'
     ]),
     ...mapActions('CarrinhoDeCompras', ['adicionarNoCarrinho']),
-    close () {
-      this.dialog = false
-      setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      }, 300)
-    },
 
-    editItem (item) {
-      this.editedIndex = this.listaDeProdutos.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
+    editarProduto (produto) {
+      this.assign(produto)
+      this.toggle(true)
     },
 
     deleteItem (item) {
       const index = this.listaDeProdutos.indexOf(item)
       confirm('Are you sure you want to delete this item?') && this.listaDeProdutos.splice(index, 1)
-    },
-
-    save () {
-      if (this.editedIndex > -1) {
-        this.atualizarProduto(this.editedItem)
-        Object.assign(this.listaDeProdutos[this.editedIndex], this.editedItem)
-      } else {
-        this.adicionarProduto(this.editedItem)
-        this.listaDeProdutos.push(this.editedItem)
-      }
-      this.close()
     }
   }
 }

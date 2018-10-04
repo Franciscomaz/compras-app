@@ -31,8 +31,8 @@ export default {
   data: () => ({
     descricao: 'Menu',
     items: [
-      { title: 'Produtos', icon: 'view_list', path: '/produtos' },
-      { title: 'Compras', icon: 'view_list', path: '/compras' }
+      { title: 'Produtos', icon: 'store', path: '/produtos' },
+      { title: 'Pedidos', icon: 'view_list', path: '/pedidos' }
     ]
   }),
   methods: {

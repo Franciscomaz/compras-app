@@ -19,8 +19,8 @@ export default new Router({
       component: ListaDeProdutos
     },
     {
-      path: '/compras',
-      descricao: 'produtos',
+      path: '/pedidos',
+      descricao: 'pedidos',
       component: ListaDeCompras
     }
   ]

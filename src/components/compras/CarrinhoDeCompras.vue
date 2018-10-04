@@ -24,13 +24,13 @@
             </v-btn>
           </v-list-tile-content>
           <v-list-tile-content>
-            <v-list-tile-title v-text="'R$ ' + produto.valor"></v-list-tile-title>
+            <v-list-tile-title v-bind:="converterParaReais|produto.valor"></v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-content>
             <v-list-tile-title v-text="'R$ ' + produto.valorTotal()"></v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-action>
-            <v-btn @click="removerDoCarrinho(produto)" flat color="red" v-text="'X'"></v-btn>
+            <v-btn @click="removerDoCarrinho(produto)" flat color="red"><v-icon>delete</v-icon></v-btn>
           </v-list-tile-action>
         </v-list-tile>
         <v-divider></v-divider>
