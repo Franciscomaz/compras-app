@@ -7,6 +7,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Notifications from 'vue-notification'
 import 'vuetify/dist/vuetify.min.css'
+import './filters/filter'
 
 Vue.config.productionTip = false
 

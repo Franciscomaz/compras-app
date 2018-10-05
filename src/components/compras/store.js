@@ -18,6 +18,9 @@ export default ({
     INCREMENTAR_QUANTIDADE: (state, obj) => {
       const produto = state.carrinhoDeCompras.find(produto => produto.id === obj.id)
       produto.incrementarQuantidade()
+    },
+    LIMPAR_CARRINHO: (state) => {
+      state.carrinhoDeCompras = []
     }
   },
   actions: {
@@ -34,6 +37,9 @@ export default ({
     removerDoCarrinho: ({ commit }, produto) => {
       produto.limpar()
       commit('REMOVER', produto)
+    },
+    limparCarrinho: ({ commit }) => {
+      commit('LIMPAR_CARRINHO')
     }
   },
   getters: {
@@ -48,6 +54,9 @@ export default ({
     },
     possuiProduto: state => {
       return state.carrinhoDeCompras.length > 0
+    },
+    produtos: state => {
+      return state.carrinhoDeCompras
     }
   }
 })

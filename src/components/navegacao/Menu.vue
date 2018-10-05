@@ -41,7 +41,15 @@ export default {
     }
   },
   computed: {
-    ...mapState('Navegacao', ['mostrarMenu'])
+    ...mapState('Navegacao', ['mostrarMenu']),
+    mostrarMenu: {
+      get () {
+        return this.$store.state.Navegacao.mostrarMenu
+      },
+      set (value) {
+        this.$store.commit('Navegacao/TOGGLE', value)
+      }
+    }
   }
 }
 </script>

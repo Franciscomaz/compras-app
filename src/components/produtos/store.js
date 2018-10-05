@@ -1,6 +1,5 @@
 import axios from 'axios'
 import Produto from './produto'
-import url from '../../config'
 
 export default ({
   namespaced: true,
@@ -28,20 +27,19 @@ export default ({
   },
   actions: {
     listarProdutos: async ({ commit }) => {
-      const produtos = (await axios.get(url + 'produtos')).data.map(produto => new Produto(produto))
-      console.log(produtos)
+      const produtos = (await axios.get(process.env.VUE_APP_URL_API + 'produtos')).data.map(produto => new Produto(produto))
       commit('LISTAR_PRODUTOS', produtos)
     },
     atualizarProduto: async ({ commit }, produto) => {
-      await axios.put(url + 'produtos/' + produto.id, produto)
+      await axios.put(process.env.VUE_APP_URL_API + 'produtos', produto)
     },
     adicionarProduto: async ({ commit, actions }, produto) => {
-      await axios.post(url + 'produtos', produto)
+      await axios.post(process.env.VUE_APP_URL_API + 'produtos', produto)
     },
     removerProduto: async ({ commit }, produto) => {
-      await axios.delete(url + 'produtos/' + produto.id)
+      await axios.delete(process.env.VUE_APP_URL_API + 'produtos/' + produto.id)
     },
-    toggle: ({ commit }, mostrarModal) => {
+    toggleModal: ({ commit }, mostrarModal) => {
       commit('TOGGLE', mostrarModal)
     },
     assign: ({ commit }, produto) => {

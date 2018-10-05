@@ -4,14 +4,17 @@ export default ({
     mostrarMenu: false
   },
   mutations: {
-    ABRIR_OU_FECHAR_MENU: (state, obj) => {
-      state.mostrarMenu = obj.mostrarMenu
+    TOGGLE: (state, value) => {
+      state.mostrarMenu = value
     }
   },
   actions: {
-    abrirOuFecharMenu: ({ state, commit }) => {
+    toggleModal: ({ commit }, value) => {
+      commit('TOGGLE', value)
+    },
+    toggleMenu: ({ state, commit }) => {
       const mostrarMenu = !state.mostrarMenu
-      commit('ABRIR_OU_FECHAR_MENU', { mostrarMenu })
+      commit('TOGGLE', mostrarMenu)
     }
   }
 })

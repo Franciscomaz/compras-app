@@ -2,26 +2,33 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Dashboard from './components/navegacao/Dashboard'
 import ListaDeProdutos from './components/produtos/ListaDeProdutos'
-import ListaDeCompras from './components/compras/ListaDeCompras'
+import ListaDePedidos from './components/pedidos/ListaDePedidos'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
+      path: '*',
+      redirect: 'produtos',
+      component: ListaDeProdutos
+    },
+    {
       path: '/',
-      descricao: 'dashboard',
-      component: Dashboard
+      name: 'dashboard',
+      component: Dashboard,
+      redirect: { name: 'produtos' }
     },
     {
       path: '/produtos',
-      descricao: 'produtos',
+      name: 'produtos',
       component: ListaDeProdutos
     },
     {
       path: '/pedidos',
-      descricao: 'pedidos',
-      component: ListaDeCompras
+      name: 'pedidos',
+      component: ListaDePedidos
     }
   ]
 })

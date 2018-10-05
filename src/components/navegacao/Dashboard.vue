@@ -11,18 +11,16 @@
         dense
     >
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3 text--secondary">
-        <v-toolbar-side-icon color="text--secondary" @click.stop="abrirOuFecharMenu()"></v-toolbar-side-icon>
+        <v-toolbar-side-icon color="text--secondary" @click.stop="toggleMenu()"></v-toolbar-side-icon>
         <span class="hidden-sm-and-down">Lista de compras</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
-
         <v-badge bottom left color="blue" v-show="quantidade() !== 0">
           <span slot="badge" v-text="quantidade()"></span>
         </v-badge>
         <v-icon @click="toggleCarrinhoDeCompras(true)" class="text--secondary">shopping_cart</v-icon>
       </v-btn>
-
     </v-toolbar>
     <v-content>
       <v-container fluid fill-height>
@@ -32,7 +30,6 @@
       </v-container>
     </v-content>
   </v-layout>
-
 </template>
 
 <script>
@@ -46,7 +43,7 @@ export default {
     descricao: 'Dashboard'
   }),
   methods: {
-    ...mapActions('Navegacao', ['abrirOuFecharMenu']),
+    ...mapActions('Navegacao', ['toggleMenu']),
     ...mapGetters('CarrinhoDeCompras', ['quantidade']),
     ...mapActions('CarrinhoDeCompras', ['toggleCarrinhoDeCompras'])
   }

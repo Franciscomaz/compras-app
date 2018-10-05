@@ -8,7 +8,7 @@
         </v-toolbar-title>
       </v-layout>
       <v-toolbar-title>
-        <v-btn @click="toggle(true)" slot="activator" small fab dark color="indigo">
+        <v-btn @click="toggleModal(true)" slot="activator" small fab dark color="indigo">
           <v-icon dark>add</v-icon>
         </v-btn>
       </v-toolbar-title>
@@ -23,7 +23,7 @@
         <td>{{ props.item.id }}</td>
         <td class="text-xs-right">{{ props.item.nome }}</td>
         <td class="text-xs-right">{{ props.item.descricao }}</td>
-        <td class="text-xs-right">{{ props.item.valor }}</td>
+        <td class="text-xs-right">{{ props.item.valor | converterParaReais }}</td>
         <td class="justify-center layout px-0">
           <v-icon
               small
@@ -31,13 +31,6 @@
               @click="editarProduto(props.item)"
           >
             edit
-          </v-icon>
-          <v-icon
-              small
-              class="mr-2"
-              @click="deleteItem(props.item)"
-          >
-            delete
           </v-icon>
           <v-icon
               small
@@ -69,12 +62,11 @@ export default {
         align: 'left',
         value: 'id'
       },
-      { text: 'Nome', value: 'nome' },
-      { text: 'Descrição', value: 'descricao' },
-      { text: 'Valor', value: 'valor' },
-      { text: 'Ações', value: 'name', sortable: false }
-    ],
-    editedIndex: -1
+      { text: 'Nome', value: 'nome', align: 'center' },
+      { text: 'Descrição', value: 'descricao', align: 'center', limit: 30 },
+      { text: 'Valor', value: 'valor', align: 'center' },
+      { text: 'Ações', value: 'actions', sortable: false }
+    ]
   }),
   mounted () {
     this.listarProdutos()
@@ -84,25 +76,21 @@ export default {
   },
   watch: {
     dialog (val) {
-      val || this.close()
+      val || this.fechar()
     }
   },
   methods: {
     ...mapActions('Produtos', [
       'listarProdutos',
+      'removerProduto',
       'assign',
-      'toggle'
+      'toggleModal'
     ]),
     ...mapActions('CarrinhoDeCompras', ['adicionarNoCarrinho']),
 
     editarProduto (produto) {
       this.assign(produto)
-      this.toggle(true)
-    },
-
-    deleteItem (item) {
-      const index = this.listaDeProdutos.indexOf(item)
-      confirm('Are you sure you want to delete this item?') && this.listaDeProdutos.splice(index, 1)
+      this.toggleModal(true)
     }
   }
 }
